@@ -31,11 +31,11 @@
             }
         }
 
-        public decimal CalculateCost()
+        public decimal CalculateCost(bool healthy)
         {
             var totalCost = (CostOfFoodPerPerson * NumberOfPeople) + (CostOfBeveragesPerPerson * NumberOfPeople) + CostOfDecorations;
 
-            if (CostOfBeveragesPerPerson == 5.00M)
+            if (healthy)
             {
                 var discount = .05M * totalCost;
                 return totalCost - discount;
