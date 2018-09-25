@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PartyCostEstimator
@@ -17,15 +10,13 @@ namespace PartyCostEstimator
         public Form1()
         {
             InitializeComponent();
-            dinnerParty = new DinnerParty() {NumberOfPeople = 5};
-            dinnerParty.SetHealthyOption(false);
-            dinnerParty.CalculateCostOfDecorations(true);
+            dinnerParty = new DinnerParty((int)numericUpDown1.Value, healthyBox.Checked, fancyBox.Checked);
             DisplayDinnerPartyCost();
         }
 
         private void DisplayDinnerPartyCost()
         {
-            decimal cost = dinnerParty.CalculateCost(healthyBox.Checked);
+            decimal cost = dinnerParty.Cost;
             costLabel.Text = cost.ToString("C");
         }
 
@@ -37,13 +28,13 @@ namespace PartyCostEstimator
 
         private void fancyBox_CheckedChanged(object sender, EventArgs e)
         {
-            dinnerParty.CalculateCostOfDecorations(fancyBox.Checked);
+            dinnerParty.FancyDecorations = fancyBox.Checked;
             DisplayDinnerPartyCost();
         }
 
         private void healthyBox_CheckedChanged(object sender, EventArgs e)
         {
-            dinnerParty.SetHealthyOption(healthyBox.Checked);
+            dinnerParty.HealthyOption = healthyBox.Checked;
             DisplayDinnerPartyCost();
         }
     }
